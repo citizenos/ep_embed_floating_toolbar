@@ -12,7 +12,6 @@ exports.documentReady = function () {
     console.debug('documentReady', window.location.href);
 
     var $editbar = $('#editbar');
-    $('ul.menu_left', $editbar).css('position', 'absolute'); // EP 1.6 introduced "fixed" menus for mobile, override it
 
     var $popups = $('#users, .popup, .epEmbedFloatingToolbar');
 
@@ -43,7 +42,6 @@ exports.postTimesliderInit = function () {
  */
 var doPosition = function ($toolbar, $popups) {
     // Initial values
-    $toolbar.css('position', 'fixed');
     $toolbar.css('top', 0);
     $toolbar.css('z-index', 1000);
 
