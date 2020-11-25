@@ -9,11 +9,9 @@
  * @see {@link http://etherpad.org/doc/v1.6.1/#index_documentready}
  */
 exports.documentReady = function () {
-    console.debug('documentReady', window.location.href);
+    const $editbar = $('#editbar');
 
-    var $editbar = $('#editbar');
-
-    var $popups = $('#users, .popup, .epEmbedFloatingToolbar');
+    const $popups = $('#users, .popup, .epEmbedFloatingToolbar');
 
     doPosition($editbar, $popups);
 };
@@ -28,8 +26,8 @@ exports.documentReady = function () {
 exports.postTimesliderInit = function () {
     console.debug('postTimesliderInit', window.location.href);
 
-    var $timeslider = $('#timeslider-top');
-    var $popups = $('.popup .epEmbedFloatingToolbar');
+    const $timeslider = $('#timeslider-top');
+    const $popups = $('.popup .epEmbedFloatingToolbar');
 
     doPosition($timeslider, $popups);
 };
@@ -40,7 +38,7 @@ exports.postTimesliderInit = function () {
  * @param {object} $toolbar JQuery object representing the toolbar
  * @param {object} $popups JQuery object representing the popup elements
  */
-var doPosition = function ($toolbar, $popups) {
+const doPosition = function ($toolbar, $popups) {
     // Initial values
     $toolbar.css('top', 0);
     $toolbar.css('z-index', 1000);
@@ -48,17 +46,17 @@ var doPosition = function ($toolbar, $popups) {
     $popups.css('top', $toolbar.outerHeight()); // All popups appear under the toolbar
 
     $(window).on('message onmessage', function (e) {
-        var msg = e.originalEvent.data;
+        const msg = e.originalEvent.data;
         if (msg.name === 'ep_embed_floating_toolbar_scroll') {
             console.log('ep_embed_floating_toolbar_scroll', 'msg received', msg);
-            var data = msg.data;
+            const data = msg.data;
 
             if (!data.scroll) {
                 console.warn('Dropping message, as data.scroll was not present');
                 return;
             }
 
-            var diff = data.scroll.top - data.frameOffset.top;
+            const diff = data.scroll.top - data.frameOffset.top;
             if (diff > 0) {
                 $toolbar.css('top', diff + 'px');
                 $popups.css('top', diff + $toolbar.outerHeight() + 'px !important');
